@@ -43,6 +43,8 @@ cd ~/IOTstack
 
 Follow prompts to install docker. Restart.
 
+https://github.com/gcgarner/IOTstack/wiki/Getting-Started
+
 ## Install portainer and pihole
 
 ```bash
@@ -52,10 +54,37 @@ Follow prompts to install docker. Restart.
 Build stack and follow prompts.
 
 ## Install OpenVPN
+### Add docker-compose details
+
+https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md
+
+```bash
+nano ~/IOTstack/docker-compose.yml
+```
+
+and add below other services
+
+```bash
+services:
+  openvpn:
+    cap_add:
+     - NET_ADMIN
+    image: darathor/openvpn
+    container_name: openvpn
+    ports:
+     - "1194:1194/udp"
+    restart: always
+    volumes:
+     - ./openvpn-data/conf:/etc/openvpn
+```
+
+https://github.com/OpenVPN/openvpn/tree/master/sample/sample-config-files
+
 - Generate .ovpn 
 - Copy .ovpn from pi
 - Copy .ovpn to device
 - Install .ovpn on device
+https://tunnelblick.net/downloads.html
 
 Install OpenVPN monitor
 - http://openvpn-monitor.openbytes.ie/#docker
